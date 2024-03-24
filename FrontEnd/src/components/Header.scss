@@ -2,18 +2,26 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  p {
+  margin: 2%;
+  nav {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    p {
+      display: flex;
+    }
   }
+
   a {
     text-decoration: none;
     color: #000;
     margin: 10px;
     padding: 5px;
-    transition: all ease 0.1s;
+    transition: all ease 0.5s;
   }
   a:hover {
     color: #007bff;
+    border-radius: 10%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   }
 }
