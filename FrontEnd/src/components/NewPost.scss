@@ -4,6 +4,12 @@ form {
   align-items: center;
   justify-content: center;
   margin-top: 50px;
+  width: 100%;
+
+  .fileInput {
+    width: 15%;
+  }
+
   input {
     width: 70%;
     padding: 10px;
@@ -29,6 +35,7 @@ form {
       margin: 10px 0;
       border: 1px solid #e0e0e0;
       cursor: pointer;
+      background-color: #fa7070;
       transition: all ease 0.2s;
       &:hover {
         background-color: #686464;

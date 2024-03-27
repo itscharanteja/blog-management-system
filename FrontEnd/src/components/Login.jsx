@@ -33,7 +33,7 @@ function Login() {
           onSubmit={onSubmit}
           validate={validate}
         >
-          <Form>
+          <Form className="input">
             <div className="email">
               <label htmlFor="email">Email</label>
               <Field type="email" id="email" name="email" />

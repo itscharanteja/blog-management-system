@@ -6,7 +6,7 @@ function Header() {
   return (
     <div>
       <div className="container">
-        <h1>Welcome to BMS</h1>
+        <h1>Blog System</h1>
         <nav>
           <p>
             <Link to="/">Home</Link>

@@ -3,10 +3,27 @@ body {
   font-weight: 400;
   height: 100%;
   width: 100%;
+  margin: 0;
   overflow: auto;
+  background-color: #fefded;
+  scrollbar-width: thin;
+  overflow-y: scroll; /* Enable vertical scrollbar */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
+  overflow: -moz-scrollbars-none; /* Hide scrollbar for older versions of Firefox */
+  overflow: hidden;
 }
 html {
   height: 100%;
   width: 100%;
+  overflow-y: scroll; /* Enable vertical scrollbar */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
+  overflow: -moz-scrollbars-none; /* Hide scrollbar for older versions of Firefox */
+  overflow: hidden;
 }
 /* Path: index.html */
+body:hover,
+html:hover {
+  overflow-y: auto; /* Show scrollbar on hover */
+}
