@@ -5,6 +5,7 @@ import NewPost from "./components/NewPost";
 import Header from "./components/Header";
 import PostList from "./components/PostList";
 import Login from "./components/Login";
+import PostBody from "./components/PostBody";
 
 function App() {
   const [posts, setPosts] = React.useState([]);
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<PostList posts={posts} />} />
         <Route path="/newpost" element={<NewPost addPost={addPost} />} />
         <Route path="/login" element={<Login />} />
+        <Route path="*" element={<PostBody />} />
       </Routes>
     </Router>
   );
