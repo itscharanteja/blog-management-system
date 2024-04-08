@@ -8,7 +8,17 @@ import Login from "./components/Login";
 import PostBody from "./components/PostBody";
 
 function App() {
-  const [posts, setPosts] = React.useState([]);
+  const [posts, setPosts] = React.useState([
+    {
+      title: "h1",
+      content: "sdf",
+      image:
+        "/Users/charan/Desktop/Wallpapers/arthur-morgan-evening-ride-hy.jpg",
+      date: "2021-09-01",
+      time: "12:00:00",
+      id: 1,
+    },
+  ]);
   const addPost = (newPost) => {
     setPosts([...posts, newPost]);
   };
@@ -18,10 +28,10 @@ function App() {
         <Header />
       </header>
       <Routes>
-        <Route path="/" element={<PostList posts={posts} />} />
+        <Route path="/" index element={<PostList posts={posts} />} />
         <Route path="/newpost" element={<NewPost addPost={addPost} />} />
         <Route path="/login" element={<Login />} />
-        <Route path="*" element={<PostBody />} />
+        <Route path="/post/:postId" element={<PostBody />} />
       </Routes>
     </Router>
   );
