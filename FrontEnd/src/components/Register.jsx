@@ -1,25 +1,28 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import "./Login.scss";
-import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function Register() {
   const initialValues = {
     email: "",
     password: "",
   };
 
   async function onSubmit(values) {
-    const response = await fetch("http://localhost:3000/login", {
+    const response = await fetch("http://localhost:3000/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(values),
     });
-    if (response.status === 200) {
+    if (response.status === 200 || response.status === 201) {
+      alert("User registered successfully");
+    } else {
+      alert("Internal server error");
     }
   }
+
   const validate = (values) => {
     let errors = {};
     if (!values.email) {
@@ -34,7 +37,7 @@ export default function Login() {
   return (
     <div>
       <div className="login">
-        <h1>Login</h1>
+        <h1>Register</h1>
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}

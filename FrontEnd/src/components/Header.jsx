@@ -6,13 +6,15 @@ function Header() {
   return (
     <div>
       <div className="container">
-        <h1>Blog System</h1>
+        <h1>
+          <Link to="/">Blog System</Link>
+        </h1>
         <nav>
           <p>
-            <Link to="/">Home</Link>
+            <Link to="/newpost">New Post</Link>
           </p>
           <p>
-            <Link to="/newpost">New Post</Link>
+            <Link to="/register">Regsiter</Link>
           </p>
           <p>
             <Link to="/login">Login</Link>
