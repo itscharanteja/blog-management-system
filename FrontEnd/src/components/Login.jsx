@@ -1,13 +1,14 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import "./Login.scss";
-import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 export default function Login() {
   const initialValues = {
     email: "",
     password: "",
   };
+  const [redirect, setRedirect] = React.useState(false);
 
   async function onSubmit(values) {
     const response = await fetch("http://localhost:3000/login", {
@@ -17,8 +18,14 @@ export default function Login() {
       },
       body: JSON.stringify(values),
     });
-    if (response.status === 200) {
+    if (response.ok) {
+      setRedirect(true);
+    } else {
+      alert("Invalid credentials");
     }
+  }
+  if (redirect) {
+    return <Navigate to="/" />;
   }
   const validate = (values) => {
     let errors = {};
