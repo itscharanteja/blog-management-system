@@ -23,7 +23,6 @@
     text-decoration: underline;
   }
   h3 {
-    margin: 10px;
     align-self: flex-start;
   }
   p {
@@ -33,7 +32,9 @@
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
     gap: 10px;
-    margin: 10px;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    margin: 2px;
   }
   .postBody {
     margin-top: 10px;

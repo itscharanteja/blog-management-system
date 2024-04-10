@@ -20,7 +20,6 @@ html {
   scrollbar-width: none; /* Hide scrollbar for Firefox */
   -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
   overflow: -moz-scrollbars-none; /* Hide scrollbar for older versions of Firefox */
-  overflow: hidden;
 }
 /* Path: index.html */
 body:hover,

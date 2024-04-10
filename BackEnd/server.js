@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const express = require("express");
-const bodyParser = require("body-parser");
 const app = express();
 const cors = require("cors");
 const user = require("./models/user");
@@ -10,7 +9,7 @@ app.use(express.json());
 // Connect to MongoDB
 mongoose
   .connect(
-    "mongodb+srv://itscharanteja:BMS@blogposts.xrydnwa.mongodb.net/?retryWrites=true&w=majority"
+    "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.3"
   )
   .then(() => {
     console.log("Connected to MongoDB");

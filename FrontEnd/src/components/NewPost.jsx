@@ -7,7 +7,7 @@ function NewPost({ addPost }) {
   const initialValues = {
     title: "",
     content: "",
-    image: null,
+    image: "",
   };
 
   const validationSchema = Yup.object({

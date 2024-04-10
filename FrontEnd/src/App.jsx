@@ -19,6 +19,24 @@ function App() {
       time: "12:00:00",
       id: 1,
     },
+    {
+      title: "h1",
+      content: "sdf",
+      image:
+        "/Users/charan/Desktop/Wallpapers/arthur-morgan-evening-ride-hy.jpg",
+      date: "2021-09-01",
+      time: "12:00:00",
+      id: 2,
+    },
+    {
+      title: "h1",
+      content: "sdf",
+      image:
+        "/Users/charan/Desktop/Wallpapers/arthur-morgan-evening-ride-hy.jpg",
+      date: "2021-09-01",
+      time: "12:00:00",
+      id: 1,
+    },
   ]);
   const addPost = (newPost) => {
     setPosts([...posts, newPost]);
