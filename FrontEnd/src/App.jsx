@@ -51,7 +51,7 @@ function App() {
         <Route path="/newpost" element={<NewPost addPost={addPost} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/post/:postId" element={<PostBody />} />
+        <Route path="/post/:postId" element={<PostBody posts={posts} />} />
       </Routes>
     </Router>
   );

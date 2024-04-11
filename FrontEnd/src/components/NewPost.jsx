@@ -1,88 +1,76 @@
-import React, { useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import React from "react";
 import "./NewPost.scss";
-import * as Yup from "yup";
 
 function NewPost({ addPost }) {
-  const initialValues = {
-    title: "",
-    content: "",
-    image: "",
-  };
+  const [title, setTitle] = React.useState("");
+  const [content, setContent] = React.useState("");
+  const [file, setFile] = React.useState("");
 
-  const validationSchema = Yup.object({
-    title: Yup.string().required("Title is required"),
-    content: Yup.string().required("Content is required"),
-    image: Yup.mixed().required("Image is required"),
-  });
+  const handleSubmit = async (e) => {
+    // Submit the form data along with the image
 
-  const handleSubmit = (values, { resetForm }) => {
-    const currentDate = new Date();
-    const formattedDate = currentDate.toLocaleDateString();
-    const formattedTime = currentDate.toLocaleTimeString();
-    const newPost = {
-      ...values,
-      date: formattedDate,
-      time: formattedTime,
-    };
-    addPost(newPost);
-    resetForm();
+    const formData = new FormData();
+    formData.set("title", title);
+    formData.set("content", content);
+    formData.set("file", file[0]);
+    console.log("Form Data:", file[0]);
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3000/newpost", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: formData,
+      });
+
+      if (response.ok) {
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleDateString();
+        const formattedTime = currentDate.toLocaleTimeString();
+        const newPost = {
+          ...values,
+          date: formattedDate,
+          time: formattedTime,
+        };
+        addPost(newPost);
+        resetForm();
+        alert("Post created successfully");
+      } else {
+        alert("Failed to create post. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Internal server error. Please try again later.");
+    }
   };
 
   return (
     <div className="body">
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ setFieldValue }) => (
-          <Form>
-            <Field type="text" placeholder="Title" name="title" id="title" />
-            <ErrorMessage name="title" component="div" />
-
-            <Field
-              as="textarea"
-              placeholder="Content"
-              name="content"
-              id="content"
-              cols="30"
-              rows="10"
-            />
-            <ErrorMessage name="content" component="div" />
-
-            <FileInputField setFieldValue={setFieldValue} />
-
-            <div className="buttons">
-              <button type="submit">Submit</button>
-              <button type="reset">Clear</button>
-            </div>
-          </Form>
-        )}
-      </Formik>
+      <form>
+        <input
+          type="title"
+          name="title"
+          placeholder="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+        <textarea
+          type="content"
+          name="content"
+          placeholder="content"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          required
+        />
+        <input type="file" onChange={(e) => setFile(e.target.files)} required />
+        <button type="submit" onClick={handleSubmit}>
+          Submit
+        </button>
+      </form>
     </div>
   );
 }
-
-const FileInputField = ({ setFieldValue }) => {
-  const handleChange = (event) => {
-    const file = event.currentTarget.files[0];
-    setFieldValue("image", file);
-  };
-
-  return (
-    <>
-      <input
-        type="file"
-        name="image"
-        id="image"
-        accept="image/jpg, image/jpeg, image/png"
-        onChange={handleChange}
-        className="fileInput"
-      />
-      <ErrorMessage name="image" component="div" />
-    </>
-  );
-};
 
 export default NewPost;
