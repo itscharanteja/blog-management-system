@@ -8,7 +8,11 @@ function NewPost({ addPost }) {
 
   const handleSubmit = async (e) => {
     // Submit the form data along with the image
-
+    const resetForm = () => {
+      setTitle("");
+      setContent("");
+      setFile("");
+    };
     const formData = new FormData();
     formData.set("title", title);
     formData.set("content", content);
@@ -18,9 +22,6 @@ function NewPost({ addPost }) {
     try {
       const response = await fetch("http://localhost:3000/newpost", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: formData,
       });
 
@@ -29,7 +30,9 @@ function NewPost({ addPost }) {
         const formattedDate = currentDate.toLocaleDateString();
         const formattedTime = currentDate.toLocaleTimeString();
         const newPost = {
-          ...values,
+          title: title,
+          content: content,
+          image: file[0],
           date: formattedDate,
           time: formattedTime,
         };
@@ -64,7 +67,12 @@ function NewPost({ addPost }) {
           onChange={(e) => setContent(e.target.value)}
           required
         />
-        <input type="file" onChange={(e) => setFile(e.target.files)} required />
+        <input
+          type="file"
+          name="file"
+          onChange={(e) => setFile(e.target.files)}
+          required
+        />
         <button type="submit" onClick={handleSubmit}>
           Submit
         </button>
