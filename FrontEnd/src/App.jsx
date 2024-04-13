@@ -9,35 +9,7 @@ import PostBody from "./components/PostBody";
 import Register from "./components/Register";
 
 function App() {
-  const [posts, setPosts] = React.useState([
-    {
-      title: "h1",
-      content: "sdf",
-      image:
-        "/Users/charan/Desktop/Wallpapers/arthur-morgan-evening-ride-hy.jpg",
-      date: "2021-09-01",
-      time: "12:00:00",
-      id: 1,
-    },
-    {
-      title: "h1",
-      content: "sdf",
-      image:
-        "/Users/charan/Desktop/Wallpapers/arthur-morgan-evening-ride-hy.jpg",
-      date: "2021-09-01",
-      time: "12:00:00",
-      id: 2,
-    },
-    {
-      title: "h1",
-      content: "sdf",
-      image:
-        "/Users/charan/Desktop/Wallpapers/arthur-morgan-evening-ride-hy.jpg",
-      date: "2021-09-01",
-      time: "12:00:00",
-      id: 1,
-    },
-  ]);
+  const [posts, setPosts] = React.useState([]);
   const addPost = (newPost) => {
     setPosts([...posts, newPost]);
   };

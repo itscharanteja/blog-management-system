@@ -1,13 +1,14 @@
 import React from "react";
 import "./NewPost.scss";
+import { Navigate } from "react-router-dom";
 
 function NewPost({ addPost }) {
   const [title, setTitle] = React.useState("");
   const [content, setContent] = React.useState("");
   const [file, setFile] = React.useState("");
+  const [isSubmitted, setIsSubmitted] = React.useState(false);
 
   const handleSubmit = async (e) => {
-    // Submit the form data along with the image
     const resetForm = () => {
       setTitle("");
       setContent("");
@@ -29,6 +30,7 @@ function NewPost({ addPost }) {
         const currentDate = new Date();
         const formattedDate = currentDate.toLocaleDateString();
         const formattedTime = currentDate.toLocaleTimeString();
+        setIsSubmitted(true);
         const newPost = {
           title: title,
           content: content,
@@ -47,6 +49,9 @@ function NewPost({ addPost }) {
       alert("Internal server error. Please try again later.");
     }
   };
+  if (isSubmitted) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className="body">
@@ -72,6 +77,7 @@ function NewPost({ addPost }) {
           name="file"
           onChange={(e) => setFile(e.target.files)}
           required
+          accept="image/*"
         />
         <button type="submit" onClick={handleSubmit}>
           Submit

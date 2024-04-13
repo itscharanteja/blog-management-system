@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 const user = require("./models/user");
 const post = require("./models/post");
 const multer = require("multer");
-const path = require("path");
 const fs = require("fs");
 
 // Set the maximum payload size to 10MB
@@ -24,7 +23,6 @@ mongoose
   });
 
 // Define storage for multer
-
 const upload = multer({ dest: "uploads/" });
 
 // Route for registering a new user
@@ -62,10 +60,9 @@ app.post("/newpost", upload.single("file"), async (req, res) => {
   const { originalname, path } = req.file;
   const ext = originalname.split(".")[1];
   const newPath = path + "." + ext;
-  fs.renameSync(path, newPath);
-
   const { title, content } = req.body;
   const postDoc = await post.create({ title, content, image: newPath });
+  fs.renameSync(path, newPath);
   res.json(postDoc);
 });
 
