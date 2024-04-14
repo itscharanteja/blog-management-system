@@ -4,11 +4,11 @@ import "./Login.scss";
 import { Navigate } from "react-router-dom";
 
 export default function Login() {
+  const [redirect, setRedirect] = React.useState(false);
   const initialValues = {
     email: "",
     password: "",
   };
-  const [redirect, setRedirect] = React.useState(false);
 
   async function onSubmit(values) {
     const response = await fetch("http://localhost:3000/login", {
@@ -16,6 +16,7 @@ export default function Login() {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(values),
     });
     if (response.ok) {

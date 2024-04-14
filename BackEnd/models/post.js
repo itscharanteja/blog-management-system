@@ -14,6 +14,9 @@ const postSchema = new mongoose.Schema(
       type: Buffer,
       required: true,
     },
+    id: {
+      type: Number,
+    },
   },
   {
     timestamps: true,
