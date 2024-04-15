@@ -6,6 +6,7 @@ function PostList({ posts }) {
   const formatDate = (date) => {
     return new Date(date).toLocaleString();
   };
+  const path = `~/Documents/Projects/blog-management-system/BackEnd/uploads/${posts}`;
 
   return (
     <div className="body">
@@ -25,9 +26,10 @@ function PostList({ posts }) {
                 </p>
               </div>
               <div className="img">
-                {post.image && post.image instanceof Blob && (
-                  <img src={URL.createObjectURL(post.image)} alt="Post" />
-                )}
+                <img
+                  src={`~/Documents/Projects/blog-management-system/BackEnd/uploads/${post.image}`}
+                  alt="image here"
+                />
               </div>
             </div>
           </Link>
