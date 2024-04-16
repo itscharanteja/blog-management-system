@@ -85,6 +85,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
+//Route for Loging Out
 app.post("/logout", (req, res) => {
   res.cookie("token", "").json("ok");
 });
@@ -98,6 +99,19 @@ app.post("/newpost", upload.single("file"), async (req, res) => {
   const postDoc = await post.create({ title, content, image: buffer });
   fs.renameSync(path, newPath);
   res.json(postDoc);
+});
+
+app.delete("/delete/:postId", async (req, res) => {
+  const postId = req.params.postId;
+  async function deletePost(id) {
+    await post.deleteOne({ _id: id });
+  }
+  try {
+    await deletePost(postId);
+    res.status(200).json({ message: "Post deleted succesfully" });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // Start the server
