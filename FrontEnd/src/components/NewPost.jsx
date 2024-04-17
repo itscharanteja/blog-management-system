@@ -14,16 +14,16 @@ function NewPost({ addPost }) {
       setContent("");
       setFile("");
     };
-    const formData = new FormData();
-    formData.set("title", title);
-    formData.set("content", content);
-    formData.set("file", file[0]);
-    console.log("Form Data:", file[0]);
+    const data = new FormData();
+    data.set("title", title);
+    data.set("content", content);
+    data.set("file", file[0]);
+
     e.preventDefault();
     try {
       const response = await fetch("http://localhost:3000/newpost", {
         method: "POST",
-        body: formData,
+        body: data,
       });
 
       if (response.ok) {
@@ -34,7 +34,7 @@ function NewPost({ addPost }) {
         const newPost = {
           title: title,
           content: content,
-          image: file[0],
+          image: file,
           date: formattedDate,
           time: formattedTime,
         };

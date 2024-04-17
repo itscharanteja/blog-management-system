@@ -13,12 +13,14 @@ const cookie = require("cookie-parser");
 
 const salt = bcrypt.genSaltSync(10);
 const secret = "sadfdsfgdfsggh234";
-
+// Define storage for multer
+const upload = multer({ dest: "uploads/" });
 // Set the maximum payload size to 10MB
 app.use(bodyParser.json({ limit: "10mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(cookie());
+app.use("/uploads", express.static(__dirname + "/uploads"));
 
 // Connect to MongoDB
 mongoose
@@ -29,13 +31,14 @@ mongoose
     console.log("Connected to MongoDB");
   });
 
-// Define storage for multer
-const upload = multer({ dest: "uploads/" });
-
 //Route for getting all posts
 app.get("/", async (req, res) => {
   const posts = await post.find();
-  res.json(posts);
+  if (posts) {
+    res.json(posts);
+  } else {
+    res.json({ message: "No posts" });
+  }
 });
 
 app.get("/profile", (req, res) => {
@@ -92,11 +95,12 @@ app.post("/logout", (req, res) => {
 
 // Route for creating a new post
 app.post("/newpost", upload.single("file"), async (req, res) => {
-  const { originalname, buffer } = req.file;
-  const ext = originalname.split(".")[1];
+  const { originalname, path } = req.file;
+  const parts = originalname.split(".");
+  const ext = parts[parts.length - 1];
   const newPath = path + "." + ext;
   const { title, content } = req.body;
-  const postDoc = await post.create({ title, content, image: buffer });
+  const postDoc = await post.create({ title, content, image: newPath });
   fs.renameSync(path, newPath);
   res.json(postDoc);
 });

@@ -1,8 +1,18 @@
-.post {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 10px;
-  border: 1px solid #e0e0e0;
-  padding: 10px;
-  margin: 10px;
+.main {
+  display: flex;
+  justify-content: space-around;
+  .post {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 10px;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  img {
+    max-width: 400px;
+    max-height: 400px;
+  }
 }

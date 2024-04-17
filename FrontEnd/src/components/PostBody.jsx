@@ -15,9 +15,9 @@ function PostBody({ posts }) {
           credentials: "include",
         });
         if (response.status === 200) {
-          setAuth(true); // User is authenticated
+          setAuth(true);
         } else {
-          setAuth(false); // User is not authenticated
+          setAuth(false);
         }
       } catch (error) {
         console.error("Error fetching profile data:", error);
@@ -48,10 +48,14 @@ function PostBody({ posts }) {
   }
 
   return (
-    <div>
+    <div className="main">
       <div className="post">
-        <div className="postheader">{post.title}</div>
-        <div className="postbody">{post.content}</div>
+        <div className="postheader">
+          <h2>{post.title}</h2>
+        </div>
+        <div className="postbody">
+          <h4>{post.content}</h4>
+        </div>
         <div className="postfooter">This is the post footer</div>
         {auth && (
           <div className="button">
@@ -59,6 +63,7 @@ function PostBody({ posts }) {
           </div>
         )}
       </div>
+      <img src={`http://localhost:3000/${post.image}`} alt="image " />
     </div>
   );
 }

@@ -6,7 +6,6 @@ function PostList({ posts }) {
   const formatDate = (date) => {
     return new Date(date).toLocaleString();
   };
-  const path = `~/Documents/Projects/blog-management-system/BackEnd/uploads/${posts}`;
 
   return (
     <div className="body">
@@ -27,7 +26,7 @@ function PostList({ posts }) {
               </div>
               <div className="img">
                 <img
-                  src={`~/Documents/Projects/blog-management-system/BackEnd/uploads/${post.image}`}
+                  src={"http://localhost:3000/" + post.image}
                   alt="image here"
                 />
               </div>
